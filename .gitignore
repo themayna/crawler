@@ -4,6 +4,9 @@
 
 # IntelliJ project files
 .idea
-*.iml
 out
 gen
+/var/cache/*
+/var/sessions/*
+/var/logs/*
+/var/bootstrap.php.cache
