@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="admin.site" class="AppBundle\Admin\SiteAdmin">
+            <tag name="sonata.admin" manager_type="doctrine_mongodb" group="Site" label="Sites" />
+            <argument />
+            <argument>AppBundle\Document\Site</argument>
+            <argument />
+            <call method="setLabelTranslatorStrategy">
+                <argument type="service" id="sonata.admin.label.strategy.underscore" />
+            </call>
+        </service>
+
+        <service id="siteService" class="AppBundle\Services\SitesService">
+        </service>
+    </services>
+</container>

@@ -1,0 +1,54 @@
+{
+    "name": "sonata-project/doctrine-mongodb-admin-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony Sonata / Integrate Doctrine MongoDB ODM into the SonataAdminBundle",
+    "keywords": ["Admin Generator", "admin", "sonata", "bootstrap", "generator", "Mongo", "MongoDB"],
+    "homepage": "http://sonata-project.org/bundles/admin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kévin Dunglas",
+            "email": "dunglas@gmail.com",
+            "homepage": "http://dunglas.fr"
+        },
+        {
+            "name": "Sonata Community",
+            "homepage": "https://github.com/sonata-project/SonataDoctrineMongoDBAdminBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.3 || ^7.0",
+        "doctrine/mongodb-odm": "^1.0",
+        "doctrine/mongodb-odm-bundle": "^3.0",
+        "sonata-project/admin-bundle": "^3.1"
+    },
+    "require-dev": {
+        "jmikola/geojson": "^1.0",
+        "sllh/php-cs-fixer-styleci-bridge": "^2.0",
+        "symfony/phpunit-bridge": "^2.7 || ^3.0"
+    },
+    "suggest": {
+        "alcaeus/mongo-php-adapter": "Allows usage of PHP 7"
+    },
+    "provide": {
+        "sonata-project/admin-bundle-persistency-layer": "1.0.0"
+    },
+    "autoload": {
+        "psr-0": {"Sonata\\DoctrineMongoDBAdminBundle": ""},
+        "exclude-from-classmap": [
+            "Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": { "Sonata\\DoctrineMongoDBAdminBundle\\Tests\\": "Tests/" }
+    },
+    "target-dir": "Sonata/DoctrineMongoDBAdminBundle",
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    }
+}
