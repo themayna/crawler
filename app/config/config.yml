@@ -113,22 +113,32 @@ old_sound_rabbit_mq:
             read_write_timeout: 3
 
             # requires php-amqplib v2.4.1+ and PHP5.4+
-            keepalive: false
+            keepalive: true
 
             # requires php-amqplib v2.4.1+
             heartbeat: 0
 
-            #requires php_sockets.dll
-            use_socket: true # default false
     producers:
         sites:
             connection:       default
-            exchange_options: {name: 'sites', type: direct}
+            exchange_options: {name: 'sites', type: fanout}
+            enable_logger: true
+        categories:
+            connection:       default
+            exchange_options: {name: 'categories', type: fanout}
             enable_logger: true
     consumers:
         sites:
             connection:       default
-            exchange_options: {name: 'sites', type: direct}
-            queue_options:    {name: 'sites'}
+            exchange_options: {name: 'sites', type: fanout}
+            queue_options: {name: 'sites', arguments: {'x-ha-policy': ['S', 'all']}}
+            qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
             callback:         siteService
+            enable_logger: true
+        categories:
+            connection:       default
+            exchange_options: {name: 'categories', type: fanout}
+            queue_options: {name: 'categories', arguments: {'x-ha-policy': ['S', 'all']}}
+            qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
+            callback:         categoryInfoService
             enable_logger: true

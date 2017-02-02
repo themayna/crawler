@@ -17,18 +17,28 @@ class SiteAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper->add('name');
         $formMapper->add('rootUrl');
+        $formMapper->add('categoryUrl');
+        $formMapper->add('filter');
+        $formMapper->add('categoryFilter');
+        $formMapper->add('categoryFilerStripper');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        $datagridMapper->add('name');
         $datagridMapper->add('rootUrl');
+        $datagridMapper->add('categoryUrl');
+        $datagridMapper->add('filter');
+        $datagridMapper->add('categoryFilter');
+        $datagridMapper->add('categoryFilerStripper');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('id');
-        $listMapper->addIdentifier('rootUrl');
+        $listMapper->addIdentifier('name');
+        $listMapper->add('rootUrl');
         $listMapper->add('_action', 'actions', array(
             'actions' => array(
                 'show' => array(),

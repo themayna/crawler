@@ -18,22 +18,36 @@ class Site extends BaseDocument
     /**
      * @MongoDB\Field(type="string")
      */
-    protected $name;
+    private $name;
 
     /**
      * @MongoDB\Field(type="string")
      */
-    protected $rootUrl;
+    private $rootUrl;
 
     /**
      * @MongoDB\Field(type="string")
      */
-    protected $categoriesUrl;
+    private $categoryUrl;
 
     /**
-     * @MongoDB\Field(type="int")
+     * @MongoDB\Field(type="string")
      */
-    protected $categoriesDefaultPageCount;
+    private $filter;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    private $categoryFilter;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    private $categoryFilerStripper;
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Category", mappedBy="site")
+     */
+    private $category;
 
     /**
      * @return mixed
@@ -70,32 +84,80 @@ class Site extends BaseDocument
     /**
      * @return mixed
      */
-    public function getCategoriesUrl()
+    public function getCategoryUrl()
     {
-        return $this->categoriesUrl;
+        return $this->categoryUrl;
     }
 
     /**
-     * @param mixed $categoriesUrl
+     * @param mixed $categoryUrl
      */
-    public function setCategoriesUrl($categoriesUrl)
+    public function setCategoryUrl($categoryUrl)
     {
-        $this->categoriesUrl = $categoriesUrl;
+        $this->categoryUrl = $categoryUrl;
     }
 
     /**
      * @return mixed
      */
-    public function getCategoriesDefaultPageCount()
+    public function getFilter()
     {
-        return $this->categoriesDefaultPageCount;
+        return $this->filter;
     }
 
     /**
-     * @param mixed $categoriesDefaultPageCount
+     * @param mixed $filter
      */
-    public function setCategoriesDefaultPageCount($categoriesDefaultPageCount)
+    public function setFilter($filter)
     {
-        $this->categoriesDefaultPageCount = $categoriesDefaultPageCount;
+        $this->filter = $filter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryFilter()
+    {
+        return $this->categoryFilter;
+    }
+
+    /**
+     * @param mixed $categoryFilter
+     */
+    public function setCategoryFilter($categoryFilter)
+    {
+        $this->categoryFilter = $categoryFilter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryFilerStripper()
+    {
+        return $this->categoryFilerStripper;
+    }
+
+    /**
+     * @param mixed $categoryFilerStripper
+     */
+    public function setCategoryFilerStripper($categoryFilerStripper)
+    {
+        $this->categoryFilerStripper = $categoryFilerStripper;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 }
