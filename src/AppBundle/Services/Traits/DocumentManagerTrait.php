@@ -16,7 +16,7 @@ trait DocumentManagerTrait
     /**
      * @return ManagerRegistry
      */
-    public function git getDocumentManager()
+    public function getDocumentManager()
     {
         return $this->documentManager;
     }
