@@ -33,17 +33,8 @@ class Site extends BaseDocument
     /**
      * @MongoDB\Field(type="string")
      */
-    private $filter;
+    private $categoryPointer;
 
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    private $categoryFilter;
-
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    private $categoryFilerStripper;
     /**
      * @MongoDB\ReferenceOne(targetDocument="Category", mappedBy="site")
      */
@@ -100,49 +91,17 @@ class Site extends BaseDocument
     /**
      * @return mixed
      */
-    public function getFilter()
+    public function getCategoryPointer()
     {
-        return $this->filter;
+        return $this->categoryPointer;
     }
 
     /**
-     * @param mixed $filter
+     * @param mixed $categoryPointer
      */
-    public function setFilter($filter)
+    public function setCategoryPointer($categoryPointer)
     {
-        $this->filter = $filter;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategoryFilter()
-    {
-        return $this->categoryFilter;
-    }
-
-    /**
-     * @param mixed $categoryFilter
-     */
-    public function setCategoryFilter($categoryFilter)
-    {
-        $this->categoryFilter = $categoryFilter;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategoryFilerStripper()
-    {
-        return $this->categoryFilerStripper;
-    }
-
-    /**
-     * @param mixed $categoryFilerStripper
-     */
-    public function setCategoryFilerStripper($categoryFilerStripper)
-    {
-        $this->categoryFilerStripper = $categoryFilerStripper;
+        $this->categoryPointer = $categoryPointer;
     }
 
     /**

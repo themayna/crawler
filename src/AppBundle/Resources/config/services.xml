@@ -18,6 +18,9 @@
             </call>
         </service>
 
+        <service id="curlService" class="AppBundle\Services\CurlService">
+        </service>
+
         <service id="siteService" class="AppBundle\Services\SitesService">
             <call method="setDocumentManager">
                 <argument type="service" id="doctrine_mongodb"/>
@@ -26,12 +29,21 @@
                 <argument type="service" id="rabbitMqWrapper"/>
             </call>
         </service>
-        <service id="categoryInfoService" class="AppBundle\Services\CategoryInfoService">
+
+        <service id="siteConsumer" class="AppBundle\Services\Consumers\SitesConsumer">
             <call method="setDocumentManager">
                 <argument type="service" id="doctrine_mongodb"/>
             </call>
             <call method="setRabbitMqWrapper">
                 <argument type="service" id="rabbitMqWrapper"/>
+            </call>
+            <call method="setCurl">
+                <argument type="service" id="curlService"/>
+            </call>
+        </service>
+        <service id="categoryConsummer" class="AppBundle\Services\Consumers\CategoryConsumer">
+            <call method="setDocumentManager">
+                <argument type="service" id="doctrine_mongodb"/>
             </call>
         </service>
     </services>

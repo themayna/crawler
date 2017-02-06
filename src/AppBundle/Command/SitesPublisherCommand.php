@@ -10,6 +10,7 @@ namespace AppBundle\Command;
 
 use AppBundle\Services\SitesService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -18,7 +19,8 @@ class SitesPublisherCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('rabbitmq:publisher.sites')
-            ->setDescription('Publish all website for further parsing');
+            ->setDescription('Publish all website for further parsing')
+            ->addArgument('site', InputArgument::OPTIONAL, 'Site name form the db');
 
     }
 
@@ -26,6 +28,7 @@ class SitesPublisherCommand extends ContainerAwareCommand
     {
         /** @var SitesService $service */
         $service = $this->getContainer()->get(SitesService::serviceName);
-        $service->publishSites();
+        $site = $input->getArgument('site');
+        $service->publishSites($site);
     }
 }

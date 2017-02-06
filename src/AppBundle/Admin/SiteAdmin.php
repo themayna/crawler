@@ -20,9 +20,7 @@ class SiteAdmin extends AbstractAdmin
         $formMapper->add('name');
         $formMapper->add('rootUrl');
         $formMapper->add('categoryUrl');
-        $formMapper->add('filter');
-        $formMapper->add('categoryFilter');
-        $formMapper->add('categoryFilerStripper');
+        $formMapper->add('categoryPointer');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -30,9 +28,7 @@ class SiteAdmin extends AbstractAdmin
         $datagridMapper->add('name');
         $datagridMapper->add('rootUrl');
         $datagridMapper->add('categoryUrl');
-        $datagridMapper->add('filter');
-        $datagridMapper->add('categoryFilter');
-        $datagridMapper->add('categoryFilerStripper');
+        $datagridMapper->add('categoryPointer');
     }
 
     protected function configureListFields(ListMapper $listMapper)

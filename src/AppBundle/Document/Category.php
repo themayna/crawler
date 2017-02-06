@@ -10,14 +10,19 @@ namespace AppBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="AppBundle\Repository\CategoryRepository")
  */
 class Category extends BaseDocument
 {
     /**
      * @MongoDB\Field(type="string")
      */
-    private $name;
+    private $title;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    private $url;
 
     /**
      * @MongoDB\ReferenceOne(targetDocument="Site", inversedBy="category")
@@ -27,17 +32,33 @@ class Category extends BaseDocument
     /**
      * @return mixed
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
-     * @param mixed $name
+     * @param mixed $title
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
     }
 
     /**

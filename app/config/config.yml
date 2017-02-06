@@ -133,12 +133,12 @@ old_sound_rabbit_mq:
             exchange_options: {name: 'sites', type: fanout}
             queue_options: {name: 'sites', arguments: {'x-ha-policy': ['S', 'all']}}
             qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
-            callback:         siteService
+            callback:         siteConsumer
             enable_logger: true
         categories:
             connection:       default
             exchange_options: {name: 'categories', type: fanout}
             queue_options: {name: 'categories', arguments: {'x-ha-policy': ['S', 'all']}}
             qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
-            callback:         categoryInfoService
+            callback:         categoryConsummer
             enable_logger: true
