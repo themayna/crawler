@@ -6,7 +6,4 @@
 .idea
 out
 gen
-/var/cache/*
-/var/sessions/*
-/var/logs/*
-/var/bootstrap.php.cache
+var/
