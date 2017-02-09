@@ -28,7 +28,6 @@ class CategoryConsumer extends Container implements ConsumerInterface
     {
         $msg = json_decode($msg->body);
         $this->saveCategoryInfo($msg);
-
     }
 
     public function saveCategoryInfo($categoryInfo)

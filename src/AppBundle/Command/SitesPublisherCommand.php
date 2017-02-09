@@ -18,7 +18,7 @@ class SitesPublisherCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('rabbitmq:publisher.sites')
+        $this->setName('rabbitmq:publisher:sites')
             ->setDescription('Publish all website for further parsing')
             ->addArgument('site', InputArgument::OPTIONAL, 'Site name form the db');
 

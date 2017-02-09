@@ -16,20 +16,13 @@ use Symfony\Component\DomCrawler\Crawler;
  * Date: 1/30/17
  * Time: 11:42 PM
  */
-class SitesConsumer implements ConsumerInterface
+class SitesConsumer
 {
     use DocumentManagerTrait;
     use RabbitMqWrapperTrait;
     use CurlTrait;
 
-    const serviceName = 'siteConsummer';
-
-    public function execute(AMQPMessage $msg)
-    {
-        $siteId = json_decode($msg->body);
-        $this->saveCategories($siteId);
-    }
-
+    const serviceName = 'siteConsumer';
 
     public function saveCategories($siteId)
     {

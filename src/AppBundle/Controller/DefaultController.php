@@ -19,9 +19,9 @@ class DefaultController extends Controller
         $crawler = new Crawler($divContent);
 
         $divs = $crawler->filter('.tabsElements li:nth-child(3) > a')->text();
-        var_dump(str_replace(' Index','',$divs));
-        echo '<pre>';
-        print_r($divs);die;
+//        var_dump(str_replace(' Index','',$divs));
+//        echo '<pre>';
+//        print_r($divs);die;
         $i = 1;
         foreach ($divs as $div) {
             var_dump(str_replace(' Index','',$div->getAttribute('href')));
