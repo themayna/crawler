@@ -1,7 +1,6 @@
 <?php
 namespace AppBundle\Controller;
 
-use AppBundle\Document\Product;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,17 +15,23 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $divContent = file_get_contents('http://www.xvideos.com/tags');
-//        var_dump($divContent);die;
+        $divContent = file_get_contents('http://www.redtube.com/redtube/youngandold');
         $crawler = new Crawler($divContent);
 
-        $divs = $crawler->filter('#tags > li > a');
+        $divs = $crawler->filter('.tabsElements li:nth-child(3) > a')->text();
+//        var_dump(str_replace(' Index','',$divs));
+//        echo '<pre>';
+//        print_r($divs);die;
+        $i = 1;
         foreach ($divs as $div) {
-            echo '<pre>';
-//            print_r($div->getAttribute('href'));
+            var_dump(str_replace(' Index','',$div->getAttribute('href')));
+            print_r($div->getAttribute('href'));
+            $i++;
         }
+        var_dump($i);
         die('after crawling');
     }
+
     /**
      * @Route("/test", name="test")
      */

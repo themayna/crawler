@@ -18,22 +18,27 @@ class Site extends BaseDocument
     /**
      * @MongoDB\Field(type="string")
      */
-    protected $name;
+    private $name;
 
     /**
      * @MongoDB\Field(type="string")
      */
-    protected $rootUrl;
+    private $rootUrl;
 
     /**
      * @MongoDB\Field(type="string")
      */
-    protected $categoriesUrl;
+    private $categoryUrl;
 
     /**
-     * @MongoDB\Field(type="int")
+     * @MongoDB\Field(type="string")
      */
-    protected $categoriesDefaultPageCount;
+    private $categoryPointer;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Category", mappedBy="site")
+     */
+    private $category;
 
     /**
      * @return mixed
@@ -70,32 +75,48 @@ class Site extends BaseDocument
     /**
      * @return mixed
      */
-    public function getCategoriesUrl()
+    public function getCategoryUrl()
     {
-        return $this->categoriesUrl;
+        return $this->categoryUrl;
     }
 
     /**
-     * @param mixed $categoriesUrl
+     * @param mixed $categoryUrl
      */
-    public function setCategoriesUrl($categoriesUrl)
+    public function setCategoryUrl($categoryUrl)
     {
-        $this->categoriesUrl = $categoriesUrl;
+        $this->categoryUrl = $categoryUrl;
     }
 
     /**
      * @return mixed
      */
-    public function getCategoriesDefaultPageCount()
+    public function getCategoryPointer()
     {
-        return $this->categoriesDefaultPageCount;
+        return $this->categoryPointer;
     }
 
     /**
-     * @param mixed $categoriesDefaultPageCount
+     * @param mixed $categoryPointer
      */
-    public function setCategoriesDefaultPageCount($categoriesDefaultPageCount)
+    public function setCategoryPointer($categoryPointer)
     {
-        $this->categoriesDefaultPageCount = $categoriesDefaultPageCount;
+        $this->categoryPointer = $categoryPointer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 }

@@ -5,17 +5,46 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="rabbitMqWrapper" class="AppBundle\Services\RabbitMqWrapper">
+            <argument type="service" id="service_container"/>
+        </service>
         <service id="admin.site" class="AppBundle\Admin\SiteAdmin">
-            <tag name="sonata.admin" manager_type="doctrine_mongodb" group="Site" label="Sites" />
-            <argument />
+            <tag name="sonata.admin" manager_type="doctrine_mongodb" group="Site" label="Sites"/>
+            <argument/>
             <argument>AppBundle\Document\Site</argument>
-            <argument />
+            <argument/>
             <call method="setLabelTranslatorStrategy">
-                <argument type="service" id="sonata.admin.label.strategy.underscore" />
+                <argument type="service" id="sonata.admin.label.strategy.underscore"/>
             </call>
         </service>
 
+        <service id="curlService" class="AppBundle\Services\CurlService">
+        </service>
+
         <service id="siteService" class="AppBundle\Services\SitesService">
+            <call method="setDocumentManager">
+                <argument type="service" id="doctrine_mongodb"/>
+            </call>
+            <call method="setRabbitMqWrapper">
+                <argument type="service" id="rabbitMqWrapper"/>
+            </call>
+        </service>
+
+        <service id="siteConsumer" class="AppBundle\Services\Consumers\SitesConsumer">
+            <call method="setDocumentManager">
+                <argument type="service" id="doctrine_mongodb"/>
+            </call>
+            <call method="setRabbitMqWrapper">
+                <argument type="service" id="rabbitMqWrapper"/>
+            </call>
+            <call method="setCurl">
+                <argument type="service" id="curlService"/>
+            </call>
+        </service>
+        <service id="categoryConsummer" class="AppBundle\Services\Consumers\CategoryConsumer">
+            <call method="setDocumentManager">
+                <argument type="service" id="doctrine_mongodb"/>
+            </call>
         </service>
     </services>
 </container>
