@@ -21,8 +21,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 abstract class BaseConsumerWrapper extends BaseConsumerCommand
 {
-    abstract protected function getConsumerCommandName();
-
     abstract protected function getConsummerCommandDescription();
 
     abstract protected function getConsumerName();
@@ -43,7 +41,7 @@ abstract class BaseConsumerWrapper extends BaseConsumerCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $consumer = $this->getContainer()->get('old_sound_rabbit_mq.sites_consumer');
+        $consumer = $this->getContainer()->get($this->getConsumerService());
         $consumer->setCallback([$this, 'processMessageCallback']);
         $consumer->getChannel()->callbacks = [$this, 'processMessageCallback'];
         if (defined('AMQP_WITHOUT_SIGNALS') === false) {
@@ -87,6 +85,16 @@ abstract class BaseConsumerWrapper extends BaseConsumerCommand
 
     public function processMessageCallback($msg)
     {
-        $this->getMessage(json_decode($msg->body, true));
+        $this->getMessage(json_decode($msg->body));
+    }
+
+    protected function getConsumerService()
+    {
+        return sprintf('old_sound_rabbit_mq.%s_consumer', $this->getConsumerName());
+    }
+
+    protected function getConsumerCommandName()
+    {
+        return sprintf('rabbitmq:consumer:%s', $this->getConsumerName());
     }
 }

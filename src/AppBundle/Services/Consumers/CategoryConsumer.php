@@ -5,10 +5,6 @@ use AppBundle\Document\Category;
 use AppBundle\Document\Site;
 use AppBundle\Services\Traits\DocumentManagerTrait;
 use AppBundle\Services\Traits\CurlTrait;
-use PhpAmqpLib\Message\AMQPMessage;
-use Symfony\Component\DependencyInjection\Container;
-use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
-use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Created by PhpStorm.
@@ -16,19 +12,13 @@ use Symfony\Component\DomCrawler\Crawler;
  * Date: 1/30/17
  * Time: 11:42 PM
  */
-class CategoryConsumer extends Container implements ConsumerInterface
+class CategoryConsumer
 {
     use DocumentManagerTrait;
     use CurlTrait;
 
     const serviceName = 'categoryConsummer';
 
-
-    public function execute(AMQPMessage $msg)
-    {
-        $msg = json_decode($msg->body);
-        $this->saveCategoryInfo($msg);
-    }
 
     public function saveCategoryInfo($categoryInfo)
     {
