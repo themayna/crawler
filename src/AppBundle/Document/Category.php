@@ -43,6 +43,8 @@ class Category extends BaseDocument
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**
@@ -59,10 +61,12 @@ class Category extends BaseDocument
     public function setUrl($url)
     {
         $this->url = $url;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return Site
      */
     public function getSite()
     {
@@ -75,5 +79,7 @@ class Category extends BaseDocument
     public function setSite($site)
     {
         $this->site = $site;
+
+        return $this;
     }
 }

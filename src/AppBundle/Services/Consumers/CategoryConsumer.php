@@ -20,7 +20,7 @@ class CategoryConsumer
     const serviceName = 'categoryConsummer';
 
 
-    public function saveCategoryInfo($categoryInfo)
+    public function saveCategoryInfoToDb($categoryInfo)
     {
         /** @var Site $site */
         $site = $this->getDocumentManager()->getRepository(Site::class)->find($categoryInfo->parentId);

@@ -11,4 +11,4 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: 3706ba8ac7116866ade16dc3eb5d22cd14a74157
-    mongodb_server: 'mongodb://localhost:27017'
+    mongodb_server: 'mongodb://192.168.1.2:27017'

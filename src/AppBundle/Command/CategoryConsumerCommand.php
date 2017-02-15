@@ -28,7 +28,7 @@ class CategoryConsumerCommand extends BaseConsumerWrapper
     {
         /** @var CategoryConsumer $service */
         $service = $this->getContainer()->get(CategoryConsumer::serviceName);
-        $service->saveCategoryInfo($msg);
+        $service->saveCategoryInfoToDb($msg);
     }
 
 }

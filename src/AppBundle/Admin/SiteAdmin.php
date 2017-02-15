@@ -21,6 +21,10 @@ class SiteAdmin extends AbstractAdmin
         $formMapper->add('rootUrl');
         $formMapper->add('categoryUrl');
         $formMapper->add('categoryPointer');
+        $formMapper->add('categoryPointer');
+        $formMapper->add('categoryPageUrl');
+        $formMapper->add('categoryPageStepper');
+        $formMapper->add('categoryPagePointer');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

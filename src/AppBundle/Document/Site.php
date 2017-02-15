@@ -36,6 +36,20 @@ class Site extends BaseDocument
     private $categoryPointer;
 
     /**
+     * @MongoDB\Field(type="string")
+     */
+    private $categoryPageUrl;
+
+    /**
+     * @MongoDB\Field(type="int")
+     */
+    private $categoryPageStepper;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    private $categoryPagePointer;
+    /**
      * @MongoDB\ReferenceOne(targetDocument="Category", mappedBy="site")
      */
     private $category;
@@ -54,6 +68,8 @@ class Site extends BaseDocument
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -70,6 +86,8 @@ class Site extends BaseDocument
     public function setRootUrl($rootUrl)
     {
         $this->rootUrl = $rootUrl;
+
+        return $this;
     }
 
     /**
@@ -86,6 +104,8 @@ class Site extends BaseDocument
     public function setCategoryUrl($categoryUrl)
     {
         $this->categoryUrl = $categoryUrl;
+
+        return $this;
     }
 
     /**
@@ -102,10 +122,64 @@ class Site extends BaseDocument
     public function setCategoryPointer($categoryPointer)
     {
         $this->categoryPointer = $categoryPointer;
+
+        return $this;
     }
 
     /**
      * @return mixed
+     */
+    public function getCategoryPageUrl()
+    {
+        return $this->categoryPageUrl;
+    }
+
+    /**
+     * @param mixed $categoryPageUrl
+     */
+    public function setCategoryPageUrl($categoryPageUrl)
+    {
+        $this->categoryPageUrl = $categoryPageUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryPageStepper()
+    {
+        return $this->categoryPageStepper;
+    }
+
+    /**
+     * @param mixed $categoryPageStepper
+     */
+    public function setCategoryPageStepper($categoryPageStepper)
+    {
+        $this->categoryPageStepper = $categoryPageStepper;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryPagePointer()
+    {
+        return $this->categoryPagePointer;
+    }
+
+    /**
+     * @param mixed $categoryPagePointer
+     */
+    public function setCategoryPagePointer($categoryPagePointer)
+    {
+        $this->categoryPagePointer = $categoryPagePointer;
+    }
+
+    /**
+     * @return Category
      */
     public function getCategory()
     {
@@ -118,5 +192,7 @@ class Site extends BaseDocument
     public function setCategory($category)
     {
         $this->category = $category;
+
+        return $this;
     }
 }

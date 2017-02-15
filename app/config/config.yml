@@ -127,6 +127,10 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: {name: 'categories', type: fanout}
             enable_logger: true
+        categories.pages:
+            connection:       default
+            exchange_options: {name: 'categories.pages', type: fanout}
+            enable_logger: true
     consumers:
         sites:
             connection:       default
@@ -139,6 +143,13 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: {name: 'categories', type: fanout}
             queue_options: {name: 'categories', arguments: {'x-ha-policy': ['S', 'all']}}
+            qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
+            callback:         categoryConsummer
+            enable_logger: true
+        categories.pages:
+            connection:       default
+            exchange_options: {name: 'categories.pages', type: fanout}
+            queue_options: {name: 'categories.pages', arguments: {'x-ha-policy': ['S', 'all']}}
             qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
             callback:         categoryConsummer
             enable_logger: true
