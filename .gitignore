@@ -6,6 +6,6 @@
 .idea
 out
 gen
-var/
+var/*
 vendor/
 web/bundles

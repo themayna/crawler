@@ -6,7 +6,7 @@
  * Time: 9:35 PM
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Consumers;
 
 define('AMQP_WITHOUT_SIGNALS', true);
 define('AMQP_DEBUG', false);

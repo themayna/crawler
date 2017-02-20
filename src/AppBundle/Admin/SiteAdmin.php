@@ -25,6 +25,10 @@ class SiteAdmin extends AbstractAdmin
         $formMapper->add('categoryPageUrl');
         $formMapper->add('categoryPageStepper');
         $formMapper->add('categoryPagePointer');
+        $formMapper->add('dataType', 'choice',
+            [
+                'choices' => ['Open' => true, 'Closed' => false]
+            ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

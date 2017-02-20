@@ -3,11 +3,7 @@ namespace AppBundle\Services;
 
 use AppBundle\Document\Site;
 use AppBundle\Services\Traits\DocumentManagerTrait;
-use AppBundle\Services\Traits\RabbitMqWrapperTrait;
-use PhpAmqpLib\Message\AMQPMessage;
-use Symfony\Component\DependencyInjection\Container;
-use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
-use Symfony\Component\DomCrawler\Crawler;
+use AppBundle\Services\Traits\ServiceContainerTrait;
 
 /**
  * Created by PhpStorm.
@@ -18,26 +14,26 @@ use Symfony\Component\DomCrawler\Crawler;
 class SitesService
 {
     use DocumentManagerTrait;
-    use RabbitMqWrapperTrait;
+    use ServiceContainerTrait;
 
     const serviceName = 'siteService';
 
-    public function publishSites($site)
+    public function publishSites($pages)
     {
-        if (!$site) {
-            $sites = $this->getDocumentManager()->getRepository(Site::class)->findAll();
-            if (empty($sites)) {
-                return;
-            }
-
-            foreach ($sites as $site) {
-                $this->getRabbitMqWrapper()->doPublish('sites', $site->getId());
-            }
+        $sites = $this->getDocumentManager()->getRepository(Site::class)->findAllOpenSource();
+        if (empty($sites)) {
             return;
         }
-        $site = $this->getDocumentManager()->getRepository(Site::class)->findOneBy(['name' => $site]);
 
-        $this->getRabbitMqWrapper()->doPublish('sites', $site->getId());
+        foreach ($sites as $site) {
+            $this->publishData($site->getName(), $pages);
+        }
+        return;
+    }
 
+    private function publishData($site, $pages)
+    {
+        $service = $this->getServiceContainer()->get($site . 'PageParser');
+        $service->publishPages($pages);
     }
 }

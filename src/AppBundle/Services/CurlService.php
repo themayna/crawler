@@ -13,11 +13,14 @@ class CurlService
 {
     const serviceName = 'curlService';
 
-    public function doCurl($url)
+    public function doCurl($url, $decode = false)
     {
         try {
+            set_time_limit(0);
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_CONNECTTIMEOUT ,0);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 400); //timeout in seconds
 
             $htmlContent = curl_exec($curl);
 
@@ -26,6 +29,9 @@ class CurlService
                 throw new \Exception($status . ':' . curl_error($curl));
             }
             curl_close($curl);
+            if ($decode) {
+                return json_decode($htmlContent);
+            }
 
             return $htmlContent;
         } catch (\Exception $exception) {

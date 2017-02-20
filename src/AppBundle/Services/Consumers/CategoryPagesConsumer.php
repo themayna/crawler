@@ -23,25 +23,25 @@ class CategoryPagesConsumer
 
     public function getVideosUrl($msg)
     {
-        $category = $this->getDocumentManager()->getRepository(Category::class)->find($msg->categoryId);
-        var_dump($category);die;
-        $divContent = $this->getCurl()->doCurl($msg->url);
-        $crawler = new Crawler($divContent);
+        try {
+            $category = $this->getDocumentManager()->getRepository(Category::class)->find($msg->categoryId);
+            $divContent = $this->getCurl()->doCurl($msg->url);
+            $crawler = new Crawler($divContent);
 
-        $divs = $crawler->filter($category->getSite()->getCategoryPagePointer());
-        if (empty($divs)) {
+            $divs = $crawler->filter($category->getSite()->getCategoryPagePointer());
+            if (empty($divs)) {
 
-            return;
-        }
-        /** @var \DOMElement $div */
-        foreach ($divs as $div) {
-            var_dump($div->childNodes);
-            die;
-            var_dump($div->getAttribute('a'));
-            die;
-            $categoryInfo['url'] = $div->getAttribute('href');
-            $categoryInfo['title'] = $div->getAttribute('title');
-            $this->getRabbitMqWrapper()->doPublish('categories', $categoryInfo);
+                return;
+            }
+            /** @var \DOMElement $div */
+            foreach ($divs as $div) {
+                $toPublish ['siteId'] = $category->getSite()->getName();
+                $toPublish['url'] = $category->getSite()->getRootUrl() . $div->getAttribute('href');
+                $this->getRabbitMqWrapper()->doPublish('pages.links', $toPublish);
+            }
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+            print_r($msg->url);
         }
     }
 }

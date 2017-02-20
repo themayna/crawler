@@ -6,7 +6,7 @@
  * Time: 6:30 PM
  */
 
-namespace AppBundle\Command;
+namespace AppBundle\Command\Consumers;
 
 
 use AppBundle\Services\Consumers\CategoryConsumer;
@@ -30,5 +30,4 @@ class CategoryConsumerCommand extends BaseConsumerWrapper
         $service = $this->getContainer()->get(CategoryConsumer::serviceName);
         $service->saveCategoryInfoToDb($msg);
     }
-
 }

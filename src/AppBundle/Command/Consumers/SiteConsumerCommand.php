@@ -5,7 +5,7 @@
  * Date: 2/1/17
  * Time: 12:11 AM
  */
-namespace AppBundle\Command;
+namespace AppBundle\Command\Consumers;
 
 use AppBundle\Services\Consumers\SitesConsumer;
 

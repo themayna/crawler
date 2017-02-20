@@ -10,7 +10,7 @@ namespace AppBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="AppBundle\Repository\SiteRepository")
  */
 class Site extends BaseDocument
 {
@@ -49,6 +49,11 @@ class Site extends BaseDocument
      * @MongoDB\Field(type="string")
      */
     private $categoryPagePointer;
+
+    /**
+     * @MongoDB\Field(type="bool")
+     */
+    private $dataType;
     /**
      * @MongoDB\ReferenceOne(targetDocument="Category", mappedBy="site")
      */
@@ -176,6 +181,22 @@ class Site extends BaseDocument
     public function setCategoryPagePointer($categoryPagePointer)
     {
         $this->categoryPagePointer = $categoryPagePointer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDataType()
+    {
+        return $this->dataType;
+    }
+
+    /**
+     * @param mixed $dataType
+     */
+    public function setDataType($dataType)
+    {
+        $this->dataType = $dataType;
     }
 
     /**
